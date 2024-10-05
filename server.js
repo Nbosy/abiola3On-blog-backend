@@ -3,10 +3,10 @@ const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config();
 
 const cors = require('cors');
-app.use(cors());
 
 const app = express();
 const port = process.env.PORT || 3001;
+app.use(cors());
 
 // Initialize Supabase client with service role key
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
