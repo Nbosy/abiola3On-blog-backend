@@ -33,9 +33,9 @@ app.post("/create-user", async (req, res) => {
   try {
     const { email, password, full_name, role } = req.body;
 
-    // if (!email || !password || !full_name || !role) {
-    //   return res.status(400).json({ error: "All fields are required" });
-    // }
+    if (!email || !password || !full_name || !role) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
     const { data, error } = await supabase.auth.admin.createUser({
       email: email,
       password: password,
