@@ -26,6 +26,22 @@ app.get('/users', async (req, res) => {
   }
 });
 
+app.delete('/delete-user/:id', async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+      const { data, error } = await supabase.auth.admin.deleteUser(userId);
+      
+      if (error) throw error;
+      
+      res.status(200).json({ message: 'User deleted successfully', data });
+  } catch (error) {
+      console.error('Error deleting user:', error.message);
+      res.status(500).json({ error: 'Failed to delete user' });
+  }
+});
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
